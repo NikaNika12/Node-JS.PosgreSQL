@@ -1,0 +1,202 @@
+Microsoft Windows [Version 10.0.19044.2130]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Ägaren>node -v
+v16.16.0
+
+C:\Users\Ägaren>npm -v
+8.11.0
+
+C:\Users\Ägaren>cd.
+
+C:\Users\Ägaren>cd..
+
+C:\Users>cd..
+
+C:\>cd Program Files
+
+C:\Program Files>PostgreSQL
+'PostgreSQL' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Program Files>cd PostgreSQL
+
+C:\Program Files\PostgreSQL>cd Npgsql
+The system cannot find the path specified.
+
+C:\Program Files\PostgreSQL>cd bin
+The system cannot find the path specified.
+
+C:\Program Files\PostgreSQL>cd 14
+
+C:\Program Files\PostgreSQL\14>bin
+'bin' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Program Files\PostgreSQL\14>cd bin
+
+C:\Program Files\PostgreSQL\14\bin>psql --v
+psql: illegal option -- v
+Try "psql --help" for more information.
+
+C:\Program Files\PostgreSQL\14\bin>psql --version
+psql (PostgreSQL) 14.5
+
+C:\Program Files\PostgreSQL\14\bin>psql -U postgress
+Password for user postgress:
+psql: error: connection to server at "localhost" (::1), port 5432 failed: FATAL:  password authentication failed for user "postgress"
+
+C:\Program Files\PostgreSQL\14\bin>\l
+'\l' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Program Files\PostgreSQL\14\bin>psql -U postgres
+Password for user postgres:
+psql (14.5)
+WARNING: Console code page (850) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# \l
+                                           List of databases
+     Name     |  Owner   | Encoding |       Collate       |        Ctype        |   Access privileges
+--------------+----------+----------+---------------------+---------------------+-----------------------
+ node_postres | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 |
+ online_store | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 |
+ postgres     | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 |
+ template0    | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 | =c/postgres          +
+              |          |          |                     |                     | postgres=CTc/postgres
+ template1    | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 | =c/postgres          +
+              |          |          |                     |                     | postgres=CTc/postgres
+ test         | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 |
+(6 rows)
+
+
+postgres=# create database test-node
+postgres-# \l
+                                           List of databases
+     Name     |  Owner   | Encoding |       Collate       |        Ctype        |   Access privileges
+--------------+----------+----------+---------------------+---------------------+-----------------------
+ node_postres | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 |
+ online_store | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 |
+ postgres     | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 |
+ template0    | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 | =c/postgres          +
+              |          |          |                     |                     | postgres=CTc/postgres
+ template1    | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 | =c/postgres          +
+              |          |          |                     |                     | postgres=CTc/postgres
+(5 rows)
+
+
+postgres-# create database test_node;
+ERROR:  syntax error at or near "-"
+LINE 1: create database test-node
+                            ^
+postgres=# create database test_node;
+CREATE DATABASE
+postgres=# \l
+                                           List of databases
+     Name     |  Owner   | Encoding |       Collate       |        Ctype        |   Access privileges
+--------------+----------+----------+---------------------+---------------------+-----------------------
+ node_postres | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 |
+ online_store | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 |
+ postgres     | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 |
+ template0    | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 | =c/postgres          +
+              |          |          |                     |                     | postgres=CTc/postgres
+ template1    | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 | =c/postgres          +
+              |          |          |                     |                     | postgres=CTc/postgres
+ test_node    | postgres | UTF8     | English_Canada.1252 | English_Canada.1252 |
+(6 rows)
+
+
+postgres=# \connect test_node
+You are now connected to database "test_node" as user "postgres".
+test_node=# \dt
+Did not find any relations.
+test_node=# \dt
+Did not find any relations.
+test_node=# \dt
+Did not find any relations.
+test_node=# \dt
+Did not find any relations.
+test_node=# \dt
+Did not find any relations.
+test_node=# create table person(
+test_node(#     id SERIAL PRIMARY KEY,
+test_node(#     name VARCHAR(255),
+test_node(#     surname VARCHAR(255)
+test_node(# );
+CREATE TABLE
+test_node=# \dt
+         List of relations
+ Schema |  Name  | Type  |  Owner
+--------+--------+-------+----------
+ public | person | table | postgres
+(1 row)
+
+
+test_node=# create table post(
+test_node(#     id SERIAL PRIMARY KEY,
+test_node(#     title VARCHAR(255),
+test_node(#     content vARCHAR(255),
+test_node(#     user_id INTEGER,
+test_node(#     FOREIGN KEY(user_id) REFERENCES person (id)
+test_node(# );
+CREATE TABLE
+test_node=# \dt
+         List of relations
+ Schema |  Name  | Type  |  Owner
+--------+--------+-------+----------
+ public | person | table | postgres
+ public | post   | table | postgres
+(2 rows)
+
+
+test_node=# select * from person;
+ id | name | surname
+----+------+---------
+(0 rows)
+
+
+test_node=# SELECT *  FROM person
+test_node-# select * from person
+test_node-# \dt
+         List of relations
+ Schema |  Name  | Type  |  Owner
+--------+--------+-------+----------
+ public | person | table | postgres
+ public | post   | table | postgres
+(2 rows)
+
+
+test_node-# select * from person
+test_node-# select * from person;
+ERROR:  syntax error at or near "select"
+LINE 2: select * from person
+        ^
+test_node=# select * from person;
+ id |   name   |   surname
+----+----------+-------------
+  1 | Veronika | Pastushkova
+  2 | Nina     | Pastushkova
+  3 | Mikhail  | Pastushkova
+(3 rows)
+
+
+test_node=# select * from person;
+ id |  name   |   surname
+----+---------+-------------
+  2 | Nina    | Pastushkova
+  3 | Mikhail | Pastushkova
+(2 rows)
+
+
+test_node=# select * from person;
+ id |  name   |   surname
+----+---------+-------------
+  2 | Nina    | Pastushkova
+  3 | Mikhail | Pastushkova
+(2 rows)
+
+
+test_node=#
